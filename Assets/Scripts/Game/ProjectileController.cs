@@ -15,6 +15,15 @@ namespace Game
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.GetComponent<ProjectileController>() != null)
+            {
+                return;
+            }
+            if (other.TryGetComponent<EnemyController>(out var enemyController))
+            {
+                GameObject.Destroy(enemyController.gameObject);
+            }
+
             GameObject.Destroy(gameObject);
         }
     }
