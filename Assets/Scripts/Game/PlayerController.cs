@@ -11,6 +11,9 @@ namespace Game
         [SerializeField] private float _decreaseAcceleration = 30.0f;
         [SerializeField] private float _maxVelocity = 15.0f;
         [SerializeField] private float _jumpHeight = 1.0f;
+        [SerializeField] private GameObject _projectilePrefab = default;
+        [SerializeField] private Transform _projectileSpawnPlaceholder = default;
+        [SerializeField] private float _projectileInitialSpeed = 200.0f;
 
         private Controls _controls;
 
@@ -25,6 +28,14 @@ namespace Game
             _controls.Player.Move.canceled += context => _movementDirection = Vector2.zero;
             _controls.Player.Rotate.performed += context => _rotationDirection = context.ReadValue<Vector2>();
             _controls.Player.Rotate.canceled += context => _rotationDirection = Vector2.zero;
+            _controls.Player.Shoot.performed += context => Shoot();
+        }
+
+        private void Shoot()
+        {
+            var projectileGO = GameObject.Instantiate(_projectilePrefab);
+            var projectileController = projectileGO.GetComponent<ProjectileController>();
+            projectileController.Initialize(_projectileSpawnPlaceholder.position, transform.forward, _projectileInitialSpeed);
         }
 
         private void OnEnable()
