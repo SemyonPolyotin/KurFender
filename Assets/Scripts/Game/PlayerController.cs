@@ -6,12 +6,14 @@ namespace Game
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody = default;
-        [SerializeField] private float _jumpForce = 300f;
         [SerializeField] private float _jumpRaycastDistance = 0.1f;
-        [SerializeField] private float _movementSpeed = 1.0f;
-        
+        [SerializeField] private float _increaseAcceleration = 10.0f;
+        [SerializeField] private float _decreaseAcceleration = 30.0f;
+        [SerializeField] private float _maxVelocity = 15.0f;
+        [SerializeField] private float _jumpHeight = 1.0f;
+
         private Controls _controls;
-        
+
         private Vector2 _movementDirection;
         private Vector2 _rotationDirection;
 
@@ -37,8 +39,24 @@ namespace Game
 
         private void FixedUpdate()
         {
-            var offset = _movementDirection * (_movementSpeed * Time.deltaTime);
-            transform.position += new Vector3(offset.x, 0.0f, offset.y);
+            var horizontalVelocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.z) +
+                                     _movementDirection * (_increaseAcceleration * Time.fixedDeltaTime);
+            horizontalVelocity = Vector2.ClampMagnitude(horizontalVelocity, _maxVelocity);
+
+            if (_movementDirection == Vector2.zero)
+            {
+                if (horizontalVelocity.magnitude < _decreaseAcceleration * Time.fixedDeltaTime)
+                {
+                    horizontalVelocity = Vector2.zero;
+                }
+                else
+                {
+                    horizontalVelocity = horizontalVelocity - horizontalVelocity.normalized * (_decreaseAcceleration * Time.fixedDeltaTime);
+                }
+            }
+
+            _rigidbody.velocity = new Vector3(horizontalVelocity.x, _rigidbody.velocity.y, horizontalVelocity.y);
+            
             transform.LookAt(transform.position + new Vector3(_rotationDirection.x, 0.0f, _rotationDirection.y));
         }
 
@@ -51,7 +69,8 @@ namespace Game
         {
             if (IsGrounded())
             {
-                _rigidbody.AddForce(Vector3.up * _jumpForce);
+                _rigidbody.velocity += Vector3.up * _rigidbody.mass *
+                                       Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
             }
         }
     }
