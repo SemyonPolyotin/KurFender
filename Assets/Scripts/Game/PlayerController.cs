@@ -15,10 +15,13 @@ namespace Game
         [SerializeField] private Transform _projectileSpawnPlaceholder = default;
         [SerializeField] private float _projectileInitialSpeed = 200.0f;
 
+        public PlayerModel playerModel;
+
         private Controls _controls;
 
         private Vector2 _movementDirection;
         private Vector2 _rotationDirection;
+
 
         private void Awake()
         {
@@ -29,13 +32,16 @@ namespace Game
             _controls.Player.Rotate.performed += context => _rotationDirection = context.ReadValue<Vector2>();
             _controls.Player.Rotate.canceled += context => _rotationDirection = Vector2.zero;
             _controls.Player.Shoot.performed += context => Shoot();
+
+            playerModel = new PlayerModel();
         }
 
         private void Shoot()
         {
             var projectileGO = GameObject.Instantiate(_projectilePrefab);
             var projectileController = projectileGO.GetComponent<ProjectileController>();
-            projectileController.Initialize(_projectileSpawnPlaceholder.position, transform.forward, _projectileInitialSpeed);
+            projectileController.Initialize(_projectileSpawnPlaceholder.position, transform.forward,
+                _projectileInitialSpeed);
         }
 
         private void OnEnable()
@@ -62,13 +68,18 @@ namespace Game
                 }
                 else
                 {
-                    horizontalVelocity = horizontalVelocity - horizontalVelocity.normalized * (_decreaseAcceleration * Time.fixedDeltaTime);
+                    horizontalVelocity = horizontalVelocity -
+                                         horizontalVelocity.normalized * (_decreaseAcceleration * Time.fixedDeltaTime);
                 }
             }
 
             _rigidbody.velocity = new Vector3(horizontalVelocity.x, _rigidbody.velocity.y, horizontalVelocity.y);
-            
+
             transform.LookAt(transform.position + new Vector3(_rotationDirection.x, 0.0f, _rotationDirection.y));
+
+            var deltaTime = Time.fixedDeltaTime;
+
+            playerModel.Tick(deltaTime);
         }
 
         private bool IsGrounded()
@@ -82,6 +93,15 @@ namespace Game
             {
                 _rigidbody.velocity += Vector3.up * _rigidbody.mass *
                                        Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
+            }
+        }
+
+        private void OnCollisionStay(Collision other)
+        {
+            if (other.gameObject.GetComponent<EnemyController>() != null)
+            {
+                const float damage = 20f;
+                playerModel.ReceiveDamage(damage);
             }
         }
     }
