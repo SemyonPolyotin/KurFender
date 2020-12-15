@@ -24,7 +24,6 @@ namespace Game
         {
             if (other.gameObject.TryGetComponent<PlayerController>(out var playerController))
             {
-                Debug.Log("Collision is entered!");
                 playerController.playerModel.CoinValue++;
                 GameObject.Destroy(gameObject);
             }
