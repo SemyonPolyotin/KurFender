@@ -10,11 +10,12 @@ namespace Game
         [SerializeField] private List<Transform> _spawnPoints = default;
         [SerializeField] private GameObject _playerPrefab = default;
 
-        private List<PlayerController> _players = new List<PlayerController>();
+        private readonly List<PlayerController> _players = new List<PlayerController>();
 
         private void Awake()
         {
-            const int numPlayers = 2;
+            //TODO: get list of players from PlayerSetupScreen
+            const int numPlayers = 4;
 
             for (var i = 0; i < numPlayers; i++)
             {
@@ -22,12 +23,17 @@ namespace Game
             }
 
             _cameraController.Initialize(_players.Select(controller => controller.transform).ToArray());
+
+            var playerModels = _players.Select(playerController => playerController.PlayerModel).ToList();
+            var gameView = GameObject.FindObjectOfType<GameView>();
+            gameView.Initialize(playerModels);
         }
 
         private void CreatePlayer(int i)
         {
             var playerGo = Instantiate(_playerPrefab);
             var playerController = playerGo.GetComponent<PlayerController>();
+            playerController.Initialize($"Player: {i}");
             playerController.transform.position = _spawnPoints[i].position;
             _players.Add(playerController);
         }

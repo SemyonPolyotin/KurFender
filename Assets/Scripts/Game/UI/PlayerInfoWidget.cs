@@ -6,6 +6,7 @@ namespace Game.UI
 {
     public class PlayerInfoWidget : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI _playerNameText = default;
         [SerializeField] private ProgressBarHorizontal _hpBar = default;
         [SerializeField] private ProgressBarHorizontal _spBar = default;
         [SerializeField] private TextMeshProUGUI _coinCount = default;
@@ -15,6 +16,7 @@ namespace Game.UI
         public void Initialize(PlayerModel playerModel)
         {
             _playerModel = playerModel;
+            _playerNameText.text = playerModel.PlayerName;
             _playerModel.OnHpValueChange += OnHpValueChange;
             _playerModel.OnSpValueChange += OnSpValueChange;
             _playerModel.OnCoinValueChange += OnCoinValueChange;
@@ -33,13 +35,6 @@ namespace Game.UI
         private void OnCoinValueChange()
         {
             _coinCount.SetText($"Coins: {_playerModel.CoinValue}");
-        }
-
-        //TODO: create playerModer with player creation
-        private void Start()
-        {
-            var playerModel = Object.FindObjectOfType<PlayerController>().playerModel;
-            Initialize(playerModel);
         }
     }
 }

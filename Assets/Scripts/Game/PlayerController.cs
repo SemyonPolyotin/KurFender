@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -15,13 +14,12 @@ namespace Game
         [SerializeField] private Transform _projectileSpawnPlaceholder = default;
         [SerializeField] private float _projectileInitialSpeed = 200.0f;
 
-        public PlayerModel playerModel;
+        public PlayerModel PlayerModel;
 
         private Controls _controls;
 
         private Vector2 _movementDirection;
         private Vector2 _rotationDirection;
-
 
         private void Awake()
         {
@@ -32,13 +30,16 @@ namespace Game
             _controls.Player.Rotate.performed += context => _rotationDirection = context.ReadValue<Vector2>();
             _controls.Player.Rotate.canceled += context => _rotationDirection = Vector2.zero;
             _controls.Player.Shoot.performed += context => Shoot();
+        }
 
-            playerModel = new PlayerModel();
+        public void Initialize(string playerName)
+        {
+            PlayerModel = new PlayerModel(playerName);
         }
 
         private void Shoot()
         {
-            var projectileGO = GameObject.Instantiate(_projectilePrefab);
+            var projectileGO = Instantiate(_projectilePrefab);
             var projectileController = projectileGO.GetComponent<ProjectileController>();
             projectileController.Initialize(_projectileSpawnPlaceholder.position, transform.forward,
                 _projectileInitialSpeed);
@@ -79,7 +80,7 @@ namespace Game
 
             var deltaTime = Time.fixedDeltaTime;
 
-            playerModel.Tick(deltaTime);
+            PlayerModel.Tick(deltaTime);
         }
 
         private bool IsGrounded()
@@ -101,7 +102,7 @@ namespace Game
             if (other.gameObject.GetComponent<EnemyController>() != null)
             {
                 const float damage = 20f;
-                playerModel.ReceiveDamage(damage);
+                PlayerModel.ReceiveDamage(damage);
             }
         }
     }

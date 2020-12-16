@@ -24,7 +24,7 @@ namespace Game
         {
             if (other.gameObject.TryGetComponent<PlayerController>(out var playerController))
             {
-                playerController.playerModel.CoinValue++;
+                playerController.PlayerModel.CoinValue++;
                 GameObject.Destroy(gameObject);
             }
         }

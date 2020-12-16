@@ -5,6 +5,7 @@ namespace Game
 {
     public class PlayerModel
     {
+        public string PlayerName { get; private set; }
         private const float _maxHpValue = 100f;
         private const float _maxSpValue = 50f;
         private const int _defaultCoinValue = 0;
@@ -52,8 +53,9 @@ namespace Game
         public float MaxHpValue => _maxHpValue;
         public float MaxSpValue => _maxSpValue;
         
-        public PlayerModel()
+        public PlayerModel(string playerName)
         {
+            PlayerName = playerName;
             //TODO make initialization stats update
             _hpValue = _maxHpValue;
             _spValue = _maxSpValue;

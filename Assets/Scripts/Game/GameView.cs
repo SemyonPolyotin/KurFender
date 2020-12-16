@@ -1,23 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Game.UI;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class GameView : MonoBehaviour
+namespace Game
 {
-    [SerializeField] private Button _pauseButton = default;
-    [SerializeField] private GameObject _pauseDialog = default;
-
-    private void OnEnable()
+    public class GameView : MonoBehaviour
     {
-        _pauseButton.onClick.AddListener(onPauseButtonClick);
-    }
+        [SerializeField] private GameObject _playerInfoWidgetPrefab = default;
+        [SerializeField] private Transform _playerInfoWidgetContainer = default;
+        [SerializeField] private Button _pauseButton = default;
+        [SerializeField] private GameObject _pauseDialog = default;
 
-    private void OnDisable()
-    {
-        _pauseButton.onClick.RemoveListener(onPauseButtonClick);
-    }
+        public void Initialize(List<PlayerModel> playerModels)
+        {
+            foreach (var playerModel in playerModels)
+            {
+                var playerInfoWidgetGO = GameObject.Instantiate(_playerInfoWidgetPrefab, _playerInfoWidgetContainer);
+                var playerInfoWidget = playerInfoWidgetGO.GetComponent<PlayerInfoWidget>();
+                playerInfoWidget.Initialize(playerModel);
+            }
+        }
+    
+        private void OnEnable()
+        {
+            _pauseButton.onClick.AddListener(OnPauseButtonClick);
+        }
 
-    private void onPauseButtonClick()
-    {
-        _pauseDialog.SetActive(true);
+        private void OnDisable()
+        {
+            _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
+        }
+
+        private void OnPauseButtonClick()
+        {
+            _pauseDialog.SetActive(true);
+        }
     }
 }
