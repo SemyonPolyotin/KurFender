@@ -15,7 +15,7 @@ namespace Game
         private void Awake()
         {
             //TODO: get list of players from PlayerSetupScreen
-            const int numPlayers = 4;
+            const int numPlayers = 1;
 
             for (var i = 0; i < numPlayers; i++)
             {

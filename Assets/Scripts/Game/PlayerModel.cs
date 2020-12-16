@@ -18,6 +18,7 @@ namespace Game
         
         private const float ImmuneTime = 1f;
         private float _immuneTimer = 0f;
+        public event Action OnImmuneStatusChanged;
         public bool IsImmune => _immuneTimer > 0f;
 
         public float HpValue
@@ -67,6 +68,10 @@ namespace Game
             if (_immuneTimer > 0)
             {
                 _immuneTimer -= deltaTime;
+                if (_immuneTimer <= 0)
+                {
+                    OnImmuneStatusChanged?.Invoke();
+                }
             }
         }
         
@@ -92,6 +97,7 @@ namespace Game
                 }
 
                 _immuneTimer = ImmuneTime;
+                OnImmuneStatusChanged?.Invoke();
             }
         }
     }

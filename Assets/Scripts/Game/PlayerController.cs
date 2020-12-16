@@ -13,6 +13,7 @@ namespace Game
         [SerializeField] private GameObject _projectilePrefab = default;
         [SerializeField] private Transform _projectileSpawnPlaceholder = default;
         [SerializeField] private float _projectileInitialSpeed = 200.0f;
+        [SerializeField] private Animator _animator = default;
 
         public PlayerModel PlayerModel;
 
@@ -35,6 +36,12 @@ namespace Game
         public void Initialize(string playerName)
         {
             PlayerModel = new PlayerModel(playerName);
+            PlayerModel.OnImmuneStatusChanged += OnImmuneStatusChanged;
+        }
+
+        private void OnImmuneStatusChanged()
+        {
+            _animator.SetBool("IsImmune", PlayerModel.IsImmune);
         }
 
         private void Shoot()

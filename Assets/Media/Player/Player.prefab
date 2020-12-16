@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 5704952247866515694}
   - component: {fileID: 5704952247866515695}
   - component: {fileID: 5704952247866515696}
+  - component: {fileID: 3344949589167934239}
   - component: {fileID: 5704952247866515697}
   m_Layer: 0
   m_Name: Player
@@ -127,6 +128,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &3344949589167934239
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704952247866515693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0751ce521720c4833babc685d63fd100, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5704952247866515697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +168,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 4691627841419009003, guid: 4ccb400fac3a34e18a39f435e55123bc, type: 3}
   _projectileSpawnPlaceholder: {fileID: 5255202000369796327}
   _projectileInitialSpeed: 20
+  _animator: {fileID: 3344949589167934239}
 --- !u!1 &5704952247888762914
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +309,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: dfa6845e54b824c6b9b2b81e602c7abf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
