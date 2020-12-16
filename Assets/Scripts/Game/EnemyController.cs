@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace Game
@@ -17,7 +16,7 @@ namespace Game
 
         private void Start()
         {
-            _player = GameObject.FindObjectOfType<PlayerController>();
+            _player = FindObjectOfType<PlayerController>();
         }
 
         private void Update()
