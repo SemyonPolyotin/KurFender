@@ -15,11 +15,21 @@ namespace Game
         private void Awake()
         {
             //TODO: get list of players from PlayerSetupScreen
-            const int numPlayers = 1;
-
-            for (var i = 0; i < numPlayers; i++)
+            var playerInfos = new List<PlayerInfo>
             {
-                CreatePlayer(i);
+                new PlayerInfo {Name = "Gandalf", Color = Color.red},
+                new PlayerInfo {Name = "Legolas", Color = Color.green}
+            };
+
+            Initialize(playerInfos);
+        }
+
+        private void Initialize(List<PlayerInfo> playerInfos)
+        {
+            for (var i = 0; i < playerInfos.Count; i++)
+            {
+                var playerInfo = playerInfos[i];
+                CreatePlayer(i, playerInfo.Name, playerInfo.Color);
             }
 
             _cameraController.Initialize(_players.Select(controller => controller.transform).ToArray());
@@ -29,11 +39,11 @@ namespace Game
             gameView.Initialize(playerModels);
         }
 
-        private void CreatePlayer(int i)
+        private void CreatePlayer(int i, string playerName, Color color)
         {
             var playerGo = Instantiate(_playerPrefab);
             var playerController = playerGo.GetComponent<PlayerController>();
-            playerController.Initialize($"Player: {i}");
+            playerController.Initialize(playerName, color);
             playerController.transform.position = _spawnPoints[i].position;
             _players.Add(playerController);
         }

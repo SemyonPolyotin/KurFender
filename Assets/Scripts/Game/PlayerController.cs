@@ -14,7 +14,9 @@ namespace Game
         [SerializeField] private Transform _projectileSpawnPlaceholder = default;
         [SerializeField] private float _projectileInitialSpeed = 200.0f;
         [SerializeField] private Animator _animator = default;
-
+        [SerializeField] private SpriteRenderer _playerCircle = default;
+        
+        
         public PlayerModel PlayerModel;
 
         private Controls _controls;
@@ -33,10 +35,11 @@ namespace Game
             _controls.Player.Shoot.performed += context => Shoot();
         }
 
-        public void Initialize(string playerName)
+        public void Initialize(string playerName, Color color)
         {
             PlayerModel = new PlayerModel(playerName);
             PlayerModel.OnImmuneStatusChanged += OnImmuneStatusChanged;
+            _playerCircle.color = color;
         }
 
         private void OnImmuneStatusChanged()
