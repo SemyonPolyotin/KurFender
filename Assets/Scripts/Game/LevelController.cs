@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Game.Player;
 using UnityEngine;
 
 namespace Game
@@ -8,7 +9,9 @@ namespace Game
     {
         [SerializeField] private CameraController _cameraController = default;
         [SerializeField] private List<Transform> _spawnPoints = default;
-        [SerializeField] private GameObject _playerPrefab = default;
+        [SerializeField] private PlayerTypeDataBase _archerData = default;
+        [SerializeField] private PlayerTypeDataBase _barbarianData = default;
+        [SerializeField] private PlayerTypeDataBase _wizardData = default;
 
         private readonly List<PlayerController> _players = new List<PlayerController>();
 
@@ -17,8 +20,9 @@ namespace Game
             //TODO: get list of players from PlayerSetupScreen
             var playerInfos = new List<PlayerInfo>
             {
-                new PlayerInfo {Name = "Gandalf", Color = Color.red},
-                new PlayerInfo {Name = "Legolas", Color = Color.green}
+                new PlayerInfo {PlayerType = _wizardData, Name = "Gandalf", Color = Color.red},
+                new PlayerInfo {PlayerType = _archerData, Name = "Legolas", Color = Color.green},
+                new PlayerInfo {PlayerType = _barbarianData, Name = "Gimli", Color = Color.blue}
             };
 
             Initialize(playerInfos);
@@ -29,7 +33,7 @@ namespace Game
             for (var i = 0; i < playerInfos.Count; i++)
             {
                 var playerInfo = playerInfos[i];
-                CreatePlayer(i, playerInfo.Name, playerInfo.Color);
+                CreatePlayer(i, playerInfo);
             }
 
             _cameraController.Initialize(_players.Select(controller => controller.transform).ToArray());
@@ -39,11 +43,11 @@ namespace Game
             gameView.Initialize(playerModels);
         }
 
-        private void CreatePlayer(int i, string playerName, Color color)
+        private void CreatePlayer(int i, PlayerInfo playerInfo)
         {
-            var playerGo = Instantiate(_playerPrefab);
+            var playerGo = Instantiate(playerInfo.PlayerType.Prefab);
             var playerController = playerGo.GetComponent<PlayerController>();
-            playerController.Initialize(playerName, color);
+            playerController.Initialize(playerInfo.Name, playerInfo.Color);
             playerController.transform.position = _spawnPoints[i].position;
             _players.Add(playerController);
         }

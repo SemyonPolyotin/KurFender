@@ -1212,7 +1212,9 @@ MonoBehaviour:
   - {fileID: 1516161922}
   - {fileID: 1106021398}
   - {fileID: 1324144065}
-  _playerPrefab: {fileID: 5704952247866515693, guid: ad9604a6a3aa3466ea52e41d7d1919dc, type: 3}
+  _archerData: {fileID: 11400000, guid: d0b929e89de434858a26d80d609ebcdc, type: 2}
+  _barbarianData: {fileID: 11400000, guid: 844bd96b76e154dd78074ee85ab1872b, type: 2}
+  _wizardData: {fileID: 11400000, guid: 4c7e3e8543e9e45a49ab620eb58721b9, type: 2}
 --- !u!4 &1175586329
 Transform:
   m_ObjectHideFlags: 0

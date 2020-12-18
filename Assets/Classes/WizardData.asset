@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1703bbcf90f495ea21456539f7c8242, type: 3}
+  m_Name: WizardData
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 784097468584280100, guid: d28cdbf33251b4c96a920a4d6b3d6af3, type: 3}
