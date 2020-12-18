@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Player;
 using UnityEngine;
@@ -48,6 +49,23 @@ namespace Game
             var playerGo = Instantiate(playerInfo.PlayerType.Prefab);
             var playerController = playerGo.GetComponent<PlayerController>();
             playerController.Initialize(playerInfo.Name, playerInfo.Color);
+            IPlayerTypeStrategy strategy;
+            switch (playerInfo.PlayerType)
+            {
+                case ArcherData archerData:
+                    strategy = new ArcherStrategy(archerData);
+                    break;
+                case BarbarianData barbarianData:
+                    strategy = new BarbarianStrategy(barbarianData);
+                    break;
+                case WizardData wizardData:
+                    strategy = new WizardStrategy(wizardData);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            playerController.SetStrategy(strategy);
             playerController.transform.position = _spawnPoints[i].position;
             _players.Add(playerController);
         }

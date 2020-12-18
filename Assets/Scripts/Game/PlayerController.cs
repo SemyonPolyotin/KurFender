@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Player;
+using UnityEngine;
 
 namespace Game
 {
@@ -18,6 +19,7 @@ namespace Game
         
         
         public PlayerModel PlayerModel;
+        private IPlayerTypeStrategy _strategy;
 
         private Controls _controls;
 
@@ -33,6 +35,7 @@ namespace Game
             _controls.Player.Rotate.performed += context => _rotationDirection = context.ReadValue<Vector2>();
             _controls.Player.Rotate.canceled += context => _rotationDirection = Vector2.zero;
             _controls.Player.Shoot.performed += context => Shoot();
+            _controls.Player.Ability.performed += context => UseAbility();
         }
 
         public void Initialize(string playerName, Color color)
@@ -40,6 +43,11 @@ namespace Game
             PlayerModel = new PlayerModel(playerName);
             PlayerModel.OnImmuneStatusChanged += OnImmuneStatusChanged;
             _playerCircle.color = color;
+        }
+
+        public void SetStrategy(IPlayerTypeStrategy strategy)
+        {
+            _strategy = strategy;
         }
 
         private void OnImmuneStatusChanged()
@@ -55,6 +63,11 @@ namespace Game
                 _projectileInitialSpeed);
         }
 
+        private void UseAbility()
+        {
+            _strategy.UseAbility();
+        }
+        
         private void OnEnable()
         {
             _controls.Enable();

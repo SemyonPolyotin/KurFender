@@ -51,6 +51,14 @@ namespace Game
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""63a3dc75-9639-40a6-b573-fd0117907ae4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -218,6 +226,28 @@ namespace Game
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a9f628f-913e-45c5-93eb-349ea263d9b0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Main"",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cbf1440-5a7e-48e1-b4e9-79b4ab758ad4"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Main"",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -257,6 +287,7 @@ namespace Game
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
             m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+            m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -310,6 +341,7 @@ namespace Game
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Rotate;
         private readonly InputAction m_Player_Shoot;
+        private readonly InputAction m_Player_Ability;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
@@ -318,6 +350,7 @@ namespace Game
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+            public InputAction @Ability => m_Wrapper.m_Player_Ability;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -339,6 +372,9 @@ namespace Game
                     @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                     @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                     @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                    @Ability.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
+                    @Ability.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
+                    @Ability.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -355,6 +391,9 @@ namespace Game
                     @Shoot.started += instance.OnShoot;
                     @Shoot.performed += instance.OnShoot;
                     @Shoot.canceled += instance.OnShoot;
+                    @Ability.started += instance.OnAbility;
+                    @Ability.performed += instance.OnAbility;
+                    @Ability.canceled += instance.OnAbility;
                 }
             }
         }
@@ -374,6 +413,7 @@ namespace Game
             void OnMove(InputAction.CallbackContext context);
             void OnRotate(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
+            void OnAbility(InputAction.CallbackContext context);
         }
     }
 }
