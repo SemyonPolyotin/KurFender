@@ -30,7 +30,7 @@ namespace Game
                 _targetPosition += _targetTransforms[i].position;
             }
 
-            _targetPosition = _targetPosition / 3f;
+            _targetPosition = _targetPosition / _targetTransforms.Length;
 
             _maxDistance = 0f;
             for (int i = 0; i < _targetTransforms.Length - 1; i++)
