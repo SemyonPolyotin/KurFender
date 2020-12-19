@@ -119,14 +119,5 @@ namespace Game
                                        Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
             }
         }
-
-        private void OnCollisionStay(Collision other)
-        {
-            if (other.gameObject.GetComponent<EnemyController>() != null)
-            {
-                const float damage = 20f;
-                PlayerModel.ReceiveDamage(damage);
-            }
-        }
     }
 }

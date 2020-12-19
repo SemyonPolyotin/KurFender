@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a686a47eee2fa44cb0a34b5d86e4d5e, type: 3}
+  m_Name: BeeChase
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"dynamic":true,"_position":{"x":762.307,"y":198.5052},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"0"},{"_position":{"x":536.7865,"y":350.027},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"1"},{"_action":{"target":{"_name":"PlayerGO","_targetVariableID":"a4c1c9c6-961e-43eb-9c8d-f6a58da19915"},"saveAs":{"_name":"Distance","_targetVariableID":"29969934-727c-4580-a77e-09b6212dd114"},"$type":"NodeCanvas.Tasks.Actions.GetDistance"},"_position":{"x":378.2173,"y":443.994},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"},{"isDynamic":true,"_condition":{"valueA":{"_name":"Distance","_targetVariableID":"29969934-727c-4580-a77e-09b6212dd114"},"checkType":1,"valueB":{"_value":10.0},"$type":"NodeCanvas.Tasks.Conditions.CheckFloat"},"_position":{"x":589.6432,"y":439.2957},"$type":"NodeCanvas.BehaviourTrees.ConditionalEvaluator","$id":"3"},{"_action":{"boolVariable":{"_name":"PlayerDetected","_targetVariableID":"48ad720b-7ea9-458b-a0ae-54609d29f5b7"},"setTo":0,"$type":"NodeCanvas.Tasks.Actions.SetBoolean"},"_position":{"x":552.9838,"y":584.5298},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"4"},{"_position":{"x":966.6854,"y":352.3762},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"5"},{"_position":{"x":841.0044,"y":454.5652},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"6"},{"_action":{"target":{"_name":"PlayerGO","_targetVariableID":"a4c1c9c6-961e-43eb-9c8d-f6a58da19915"},"saveAs":{"_name":"Distance","_targetVariableID":"29969934-727c-4580-a77e-09b6212dd114"},"$type":"NodeCanvas.Tasks.Actions.GetDistance"},"_position":{"x":764.6561,"y":579.0717},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"7"},{"_condition":{"valueA":{"_name":"Distance","_targetVariableID":"29969934-727c-4580-a77e-09b6212dd114"},"checkType":4,"valueB":{"_value":1.0},"$type":"NodeCanvas.Tasks.Conditions.CheckFloat"},"_position":{"x":980.7802,"y":573.1986},"$type":"NodeCanvas.BehaviourTrees.ConditionalEvaluator","$id":"8"},{"_action":{"boolVariable":{"_name":"PlayerReached","_targetVariableID":"0516b06f-18c9-4f79-abe6-36a0b4df664a"},"$type":"NodeCanvas.Tasks.Actions.SetBoolean"},"_position":{"x":955.3604,"y":696.7831},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"9"},{"_action":{"target":{"_name":"PlayerGO","_targetVariableID":"a4c1c9c6-961e-43eb-9c8d-f6a58da19915"},"speed":{"_value":4.0},"stopDistance":{"_value":0.1},"$type":"NodeCanvas.Tasks.Actions.MoveTowards"},"_tag":"Chasing","_position":{"x":1165.677,"y":447.5179},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"10"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"10"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"8"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"8"},"_targetNode":{"$ref":"9"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{"Distance":{"_name":"Distance","_id":"29969934-727c-4580-a77e-09b6212dd114","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.16
+    _category: 
+    _comments: 
+    _translation: {x: -423, y: -398}
+    _zoomFactor: 0.851363
+  _haltSerialization: 0

@@ -22,8 +22,8 @@ namespace Game
             var playerInfos = new List<PlayerInfo>
             {
                 new PlayerInfo {PlayerType = _wizardData, Name = "Gandalf", Color = Color.red},
-                new PlayerInfo {PlayerType = _archerData, Name = "Legolas", Color = Color.green},
-                new PlayerInfo {PlayerType = _barbarianData, Name = "Gimli", Color = Color.blue}
+                // new PlayerInfo {PlayerType = _archerData, Name = "Legolas", Color = Color.green},
+                // new PlayerInfo {PlayerType = _barbarianData, Name = "Gimli", Color = Color.blue}
             };
 
             Initialize(playerInfos);
