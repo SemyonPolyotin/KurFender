@@ -11,6 +11,7 @@ namespace Game
         [SerializeField] private Transform _playerInfoWidgetContainer = default;
         [SerializeField] private Button _pauseButton = default;
         [SerializeField] private GameObject _pauseDialog = default;
+        [SerializeField] private EndGameDialog _endGameDialog = default;
 
         public void Initialize(List<PlayerModel> playerModels)
         {
@@ -21,7 +22,13 @@ namespace Game
                 playerInfoWidget.Initialize(playerModel);
             }
         }
-    
+
+        public void ShowEndGameDialog(bool isVictory)
+        {
+            _endGameDialog.gameObject.SetActive(true);
+            _endGameDialog.Initialize(isVictory);
+        }
+        
         private void OnEnable()
         {
             _pauseButton.onClick.AddListener(OnPauseButtonClick);

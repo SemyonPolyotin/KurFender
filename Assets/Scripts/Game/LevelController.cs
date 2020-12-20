@@ -21,8 +21,8 @@ namespace Game
             //TODO: get list of players from PlayerSetupScreen
             var playerInfos = new List<PlayerInfo>
             {
-                new PlayerInfo {PlayerType = _wizardData, Name = "Gandalf", Color = Color.red},
-                // new PlayerInfo {PlayerType = _archerData, Name = "Legolas", Color = Color.green},
+                new PlayerInfo {PlayerType = _archerData, Name = "Legolas", Color = Color.green},
+                // new PlayerInfo {PlayerType = _wizardData, Name = "Gandalf", Color = Color.red},
                 // new PlayerInfo {PlayerType = _barbarianData, Name = "Gimli", Color = Color.blue}
             };
 
@@ -42,6 +42,9 @@ namespace Game
             var playerModels = _players.Select(playerController => playerController.PlayerModel).ToList();
             var gameView = GameObject.FindObjectOfType<GameView>();
             gameView.Initialize(playerModels);
+
+            var endTriggerList = FindObjectsOfType<TriggerZone>().ToList();
+            LevelDirector levelDirector = new LevelDirector(playerModels, endTriggerList);
         }
 
         private void CreatePlayer(int i, PlayerInfo playerInfo)

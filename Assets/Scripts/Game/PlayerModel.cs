@@ -53,7 +53,8 @@ namespace Game
 
         public float MaxHpValue => _maxHpValue;
         public float MaxSpValue => _maxSpValue;
-        
+        public bool IsDead => HpValue == 0f;
+
         public PlayerModel(string playerName)
         {
             PlayerName = playerName;

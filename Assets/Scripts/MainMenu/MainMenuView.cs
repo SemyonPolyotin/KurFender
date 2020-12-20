@@ -23,7 +23,7 @@ namespace MainMenu
 
         private void OnStartButtonClick()
         {
-            ModuleManager.LoadGame();
+            ModuleManager.LoadGame("DemoScene");
         }
 
         private void OnExitButtonClick()

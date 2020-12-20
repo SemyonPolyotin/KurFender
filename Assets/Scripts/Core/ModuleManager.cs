@@ -9,9 +9,9 @@ namespace Core
             SceneManager.LoadScene("Scenes/MainMenu");
         }
 
-        public static void LoadGame()
+        public static void LoadGame(string levelName)
         {
-            SceneManager.LoadScene("Scenes/Game");
+            SceneManager.LoadScene(levelName);
         }
     }
 }
