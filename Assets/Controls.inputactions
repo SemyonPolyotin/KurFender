@@ -30,7 +30,15 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Shoot",
+                    "name": "MeleeAttack",
+                    "type": "Button",
+                    "id": "e5dbe9e9-baaa-4662-90fe-3e0c9723ac07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RangeAttack",
                     "type": "Button",
                     "id": "445c5086-365e-431e-8dea-fdf2756175ff",
                     "expectedControlType": "Button",
@@ -208,7 +216,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Main",
-                    "action": "Shoot",
+                    "action": "RangeAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4700fb3b-abbe-4265-913c-6a26e06b9f55",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Press(pressPoint=0.9)",
+                    "processors": "",
+                    "groups": "Main",
+                    "action": "RangeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -231,6 +250,28 @@
                     "processors": "",
                     "groups": "Main",
                     "action": "Ability",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e109a77e-0e11-41cc-b768-a4c133c99592",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Main",
+                    "action": "MeleeAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f58514a-9f05-43eb-907d-5b62b9b66cb2",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Main",
+                    "action": "MeleeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

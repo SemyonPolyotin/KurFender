@@ -34,9 +34,11 @@ namespace Game
             _controls.Player.Move.canceled += context => _movementDirection = Vector2.zero;
             _controls.Player.Rotate.performed += context => _rotationDirection = context.ReadValue<Vector2>();
             _controls.Player.Rotate.canceled += context => _rotationDirection = Vector2.zero;
-            _controls.Player.Shoot.performed += context => Shoot();
+            _controls.Player.MeleeAttack.performed += context => MeleeAttack();
+            _controls.Player.RangeAttack.performed += context => RangeAttack();
             _controls.Player.Ability.performed += context => UseAbility();
         }
+
 
         public void Initialize(string playerName, Color color)
         {
@@ -55,7 +57,12 @@ namespace Game
             _animator.SetBool("IsImmune", PlayerModel.IsImmune);
         }
 
-        private void Shoot()
+        private void MeleeAttack()
+        {
+            _strategy.UseMeleeAttack();
+        }
+        
+        private void RangeAttack()
         {
             var projectileGO = Instantiate(_projectilePrefab);
             var projectileController = projectileGO.GetComponent<ProjectileController>();

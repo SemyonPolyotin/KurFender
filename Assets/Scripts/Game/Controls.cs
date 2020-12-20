@@ -45,7 +45,15 @@ namespace Game
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""MeleeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""e5dbe9e9-baaa-4662-90fe-3e0c9723ac07"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RangeAttack"",
                     ""type"": ""Button"",
                     ""id"": ""445c5086-365e-431e-8dea-fdf2756175ff"",
                     ""expectedControlType"": ""Button"",
@@ -223,7 +231,18 @@ namespace Game
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Main"",
-                    ""action"": ""Shoot"",
+                    ""action"": ""RangeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4700fb3b-abbe-4265-913c-6a26e06b9f55"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press(pressPoint=0.9)"",
+                    ""processors"": """",
+                    ""groups"": ""Main"",
+                    ""action"": ""RangeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -246,6 +265,28 @@ namespace Game
                     ""processors"": """",
                     ""groups"": ""Main"",
                     ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e109a77e-0e11-41cc-b768-a4c133c99592"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Main"",
+                    ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f58514a-9f05-43eb-907d-5b62b9b66cb2"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Main"",
+                    ""action"": ""MeleeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -286,7 +327,8 @@ namespace Game
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
-            m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+            m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
+            m_Player_RangeAttack = m_Player.FindAction("RangeAttack", throwIfNotFound: true);
             m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         }
 
@@ -340,7 +382,8 @@ namespace Game
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Rotate;
-        private readonly InputAction m_Player_Shoot;
+        private readonly InputAction m_Player_MeleeAttack;
+        private readonly InputAction m_Player_RangeAttack;
         private readonly InputAction m_Player_Ability;
         public struct PlayerActions
         {
@@ -349,7 +392,8 @@ namespace Game
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
-            public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+            public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
+            public InputAction @RangeAttack => m_Wrapper.m_Player_RangeAttack;
             public InputAction @Ability => m_Wrapper.m_Player_Ability;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -369,9 +413,12 @@ namespace Game
                     @Rotate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
                     @Rotate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
                     @Rotate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
-                    @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                    @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                    @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                    @MeleeAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMeleeAttack;
+                    @MeleeAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMeleeAttack;
+                    @MeleeAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMeleeAttack;
+                    @RangeAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRangeAttack;
+                    @RangeAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRangeAttack;
+                    @RangeAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRangeAttack;
                     @Ability.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
                     @Ability.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
                     @Ability.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
@@ -388,9 +435,12 @@ namespace Game
                     @Rotate.started += instance.OnRotate;
                     @Rotate.performed += instance.OnRotate;
                     @Rotate.canceled += instance.OnRotate;
-                    @Shoot.started += instance.OnShoot;
-                    @Shoot.performed += instance.OnShoot;
-                    @Shoot.canceled += instance.OnShoot;
+                    @MeleeAttack.started += instance.OnMeleeAttack;
+                    @MeleeAttack.performed += instance.OnMeleeAttack;
+                    @MeleeAttack.canceled += instance.OnMeleeAttack;
+                    @RangeAttack.started += instance.OnRangeAttack;
+                    @RangeAttack.performed += instance.OnRangeAttack;
+                    @RangeAttack.canceled += instance.OnRangeAttack;
                     @Ability.started += instance.OnAbility;
                     @Ability.performed += instance.OnAbility;
                     @Ability.canceled += instance.OnAbility;
@@ -412,7 +462,8 @@ namespace Game
             void OnJump(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
             void OnRotate(InputAction.CallbackContext context);
-            void OnShoot(InputAction.CallbackContext context);
+            void OnMeleeAttack(InputAction.CallbackContext context);
+            void OnRangeAttack(InputAction.CallbackContext context);
             void OnAbility(InputAction.CallbackContext context);
         }
     }
