@@ -244,9 +244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 5704952247866515695}
   _jumpRaycastDistance: 0.25
-  _increaseAcceleration: 10
+  _increaseAcceleration: 30
   _decreaseAcceleration: 30
-  _maxVelocity: 10
+  _maxVelocity: 15
   _jumpHeight: 1
   _projectilePrefab: {fileID: 4691627841419009003, guid: 4ccb400fac3a34e18a39f435e55123bc, type: 3}
   _projectileSpawnPlaceholder: {fileID: 5255202000369796327}
