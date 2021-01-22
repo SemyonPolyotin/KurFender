@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Player;
+using Game.UI;
 using UnityEngine;
 
-namespace Game
+namespace Game.Level
 {
     public class LevelDirector
     {

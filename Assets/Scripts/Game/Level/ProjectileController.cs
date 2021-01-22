@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Game.Enemies;
 using UnityEngine;
 
-namespace Game
+namespace Game.Level
 {
     public class ProjectileController : MonoBehaviour
     {

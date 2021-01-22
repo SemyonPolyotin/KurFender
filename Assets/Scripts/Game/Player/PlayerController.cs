@@ -1,7 +1,7 @@
-﻿using Game.Player;
+﻿using Game.Level;
 using UnityEngine;
 
-namespace Game
+namespace Game.Player
 {
     public class PlayerController : MonoBehaviour
     {

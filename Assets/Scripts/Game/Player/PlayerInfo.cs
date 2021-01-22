@@ -1,7 +1,6 @@
-using Game.Player;
 using UnityEngine;
 
-namespace Game
+namespace Game.Player
 {
     public struct PlayerInfo
     {

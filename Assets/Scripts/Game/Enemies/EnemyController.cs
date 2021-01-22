@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Game.Player;
+using UnityEngine;
 using UnityEngine.AI;
 
-namespace Game
+namespace Game.Enemies
 {
     public class EnemyController : MonoBehaviour
     {

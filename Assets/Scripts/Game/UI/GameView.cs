@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Game.UI;
+using Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game
+namespace Game.UI
 {
     public class GameView : MonoBehaviour
     {

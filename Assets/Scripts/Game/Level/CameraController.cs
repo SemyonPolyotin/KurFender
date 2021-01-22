@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game
+namespace Game.Level
 {
     public class CameraController : MonoBehaviour
     {

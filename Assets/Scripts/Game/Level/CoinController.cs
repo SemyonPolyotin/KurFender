@@ -1,7 +1,8 @@
 ﻿using System;
+using Game.Player;
 using UnityEngine;
 
-namespace Game
+namespace Game.Level
 {
     public class CoinController : MonoBehaviour
     {
